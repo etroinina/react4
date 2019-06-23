@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Category } from "./Category";
+import Category from "./Category";
 import '../styles/Sidebar.css';
 
 export class Sidebar extends Component {
@@ -8,32 +8,32 @@ export class Sidebar extends Component {
             {
                 id: 1,
                 title: 'Shoes',
-                subCat: [
+                subCategories: [
                     {
                         id: 4,
                         title: 'Sandals',
-                        subCat: [
+                        subCategories: [
                             {
                                 id: 5,
                                 title: 'Strapped',
-                                subCat: []
+                                subCategories: []
                             }
                         ]
                     }
-                ]
+                ],
+                tasks: []
             },
             {
                 id: 2,
                 title: 'Dresses',
-                subCat: []
+                subCategories: []
             },
             {
                 id: 3,
                 title: 'Coats',
-                subCat: []
+                subCategories: []
             }
         ]
-
     };
 
     onAddItems = () => {
@@ -45,6 +45,7 @@ export class Sidebar extends Component {
             };
         });
     };
+
 
     render() {
 
@@ -65,38 +66,9 @@ export class Sidebar extends Component {
         return (
             <div className="Sidebar">
                 <ul>
-                {this.state.categories.map((item, i ) =>
-                    <li key={ item.id }>
-                        <div className="title">{ item.title }</div>
-                        {
-                            item.subCat
-                                ? (
-                                    <ul key={i}>
-                                        {item.subCat.map(function (subCat, i) {
-                                            return <li key={i}>{subCat.title}</li>
-                                        })}
-                                    </ul>
-                                )
-                                : null
-                        }
-
-                        {/*<div className="title">{ item.title }</div>*/}
-                        {/*if (item.subCat !== undefined) {*/}
-                            {/*return (*/}
-                            {/*<ul key={i}>{item.title}*/}
-
-                            {/*{item.subCat.map(function (subCat, i) {*/}
-                                {/*return <li key={i}>{subCat.title}</li>;*/}
-                            {/*})}*/}
-                            {/*</ul>*/}
-                            {/*)*/}
-                        {/*} else {*/}
-                            {/*return (*/}
-                            {/*<li key={i}>{item.title}</li>*/}
-                            {/*)*/}
-                        {/*}*/}
-                    </li>
-                )};
+                    {this.state.categories.map(i => (
+                        <Category item={i} key={i.id} />
+                    ))}
                 </ul>
             </div>
         );

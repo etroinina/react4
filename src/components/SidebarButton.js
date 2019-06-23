@@ -7,9 +7,8 @@ export class SidebarButton extends Component {
     };
 
     render() {
-        const { toggleSidebar } = this.props;
         return (
-            <button className="SidebarButton-button" onClick={ () => toggleSidebar() }> {this.state.buttonName} </button>
+            <button className="SidebarButton-button" onClick={ () =>  this.props.toggleSidebar() }> {this.state.buttonName} </button>
         );
     }
 }
