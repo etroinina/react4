@@ -1,6 +1,6 @@
 .Sidebar {
-    padding: 10px;
-    background: #ccc;
+    padding: 15px;
+    background: #eaeaea;
     border-right: 1px solid gray;
     min-height: 200px;
     width: 25%;
@@ -13,7 +13,11 @@
 
 .Sidebar ul li {
     position: relative;
-    padding-right: 20px;
+    padding: 15px 20px 15px 5px;
+}
+
+.Sidebar>ul>li {
+    border-top: 1px solid grey;
 }
 
 .Sidebar ul li ul {
@@ -27,16 +31,16 @@
     text-align: center;
     line-height: 16px;
     border-radius: 100%;
-    background: green;
+    background: #0dbd05;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 10px;
     cursor: pointer;
+    border: 1px solid #b1b1b1;
 }
 
 .addButton span {
-    font-size: 12px;
+    font-size: 16px;
     color: black;
-    font-weight: 600;
     display: inline-block;
 }

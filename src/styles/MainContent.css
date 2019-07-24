@@ -1,6 +1,6 @@
 .MainContent {
     flex: 1;
-    padding: 10px;
-    background: #ccc;
+    padding: 15px;
+    background: #f9f9f9;
     min-height: 200px;
 }

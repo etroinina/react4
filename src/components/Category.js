@@ -1,22 +1,17 @@
 import React from "react";
 
-function Category({ item }) {
-    let children = null;
-
-    if (item.subCategories && item.subCategories.length) {
-        children = (
-            <ul>
-                {item.subCategories.map(i => (
-                    <Category item={i} key={i.id} />
-                ))}
-            </ul>
-        );
-    }
-
+function Category({ item, children, onAddSubcategory }) {
     return (
         <li>
             {item.title}
-            {children}
+            <div className="addButton" onClick={() => {onAddSubcategory(item)}}><span>+</span></div>
+            {children && ( children.length > 0 ) && (
+                <ul>
+                    {children.map(category => (
+                        <Category item={category} key={category.id} children={category.subCategories} onAddSubcategory={onAddSubcategory}/>
+                    ))}
+                </ul>
+            )}
         </li>
     );
 }
