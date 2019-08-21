@@ -1,106 +1,28 @@
-import React, { Component } from "react";
-import Category from "./Category";
+import React from "react";
+import { ItemsList } from "./itemsList";
 import '../styles/Sidebar.css';
-import cloneDeep from 'lodash/cloneDeep';
+import { AddItem } from './addItem';
 
-export class Sidebar extends Component {
-    state = {
-        categories: [
-            {
-                id: 1,
-                title: 'Shoes',
-                subCategories: [
-                    {
-                        id: 4,
-                        title: 'Sandals',
-                        subCategories: [
-                            {
-                                id: 5,
-                                title: 'Strapped',
-                                subCategories: []
-                            }
-                        ]
-                    },
-                    {
-                        id: 6,
-                        title: 'Boots',
-                        subCategories: [
-                            {
-                                id: 7,
-                                title: 'High heels',
-                                subCategories: []
-                            }
-                        ]
-                    }
-                ],
-                tasks: []
-            },
-            {
-                id: 2,
-                title: 'Dresses',
-                subCategories: []
-            },
-            {
-                id: 3,
-                title: 'Coats',
-                subCategories: []
-            }
-        ]
-    };
+export const Sidebar = (props) => {
+    const { categories, addCategory } = props;
 
-    recursAdding = (object, newCategoryObj) => {
+    return (
+        <div className="Sidebar">
+            {/*<button className="addRootCategoryButton" onClick={ this.onAddChild }>Add Category</button>*/}
 
-        for(let i=0; i < object.length; i++) {
+            <br/>
+            <AddItem onAdd={ addCategory }/>
+            <br/>
 
-            if(object[i].id === newCategoryObj.id) {
-                object[i].subCategories.push(newCategoryObj);
-                return
-            }
-
-
-            if (object[i].subCategories.length > 0) {
-                this.recursAdding(object[i].subCategories, newCategoryObj)
-            }
-
-            else {
-                if(object[i].id === newCategoryObj.id) {
-                    object[i].subCategories.push(newCategoryObj);
-                }
-            }
-        }
-
-        return object;
-    };
-
-
-    onAddSubcategory = (category) => {
-        let allCategory = cloneDeep(this.state.categories);
-        const currentCategoryId = category.id;
-        const newCategoryTitle = prompt('Add Categorys title');
-        const newCategory = {
-           id: currentCategoryId,
-           title: newCategoryTitle,
-        };
-
-        let updatedArray = this.recursAdding(allCategory, newCategory);
-
-        this.setState({
-            categories: updatedArray
-        })
-    };
-
-
-    render() {
-        return (
-            <div className="Sidebar">
-                <button className="addRootCategoryButton" onClick={this.onAddSubcategory}></button>
-
-                <ul>
-                    {this.state.categories.map(category => (
-                        <Category item={category} key={category.id} children={category.subCategories} onAddSubcategory={this.onAddSubcategory}/>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
-}
+            <ul>
+                {categories.map(category => (
+                    <ItemsList item={ category }
+                               key={ category.id }
+                               children={ category.children }
+                               addCategory={ addCategory }
+                    />
+                ))}
+            </ul>
+        </div>
+    );
+};
